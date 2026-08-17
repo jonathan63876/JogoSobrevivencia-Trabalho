@@ -1,6 +1,3 @@
-# Último Sinal — Cidade Morta
-
-```python
 import random
 import time
 import os
