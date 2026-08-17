@@ -1,0 +1,709 @@
+# Último Sinal — Cidade Morta
+
+```python
+import random
+import time
+import os
+
+vida = 100
+fome = 80
+sede = 80
+energia = 100
+
+comida = 3
+agua = 2
+remedio = 1
+municao = 6
+madeira = 0
+pecas = 0
+
+dia = 1
+hora = 18
+
+local = "Abrigo"
+historia = 0
+seguranca_abrigo = 40
+
+
+def limpar_tela():
+    os.system("cls" if os.name == "nt" else "clear")
+
+
+def esperar():
+    input("\nAperte ENTER para continuar...")
+
+
+def mostrar_status():
+    print("\n==============================")
+    print("       ÚLTIMO SINAL")
+    print("==============================")
+    print("Dia:", dia, "| Hora:", str(hora) + ":00")
+    print("Local:", local)
+    print("------------------------------")
+    print("Vida:", vida)
+    print("Fome:", fome)
+    print("Sede:", sede)
+    print("Energia:", energia)
+    print("------------------------------")
+    print("Comida:", comida)
+    print("Água:", agua)
+    print("Remédio:", remedio)
+    print("Munição:", municao)
+    print("Madeira:", madeira)
+    print("Peças:", pecas)
+    print("==============================")
+
+
+def passar_tempo(tempo):
+    global hora
+    global fome
+    global sede
+    global energia
+    global dia
+
+    hora += tempo
+
+    fome -= tempo * 3
+    sede -= tempo * 4
+    energia -= tempo * 2
+
+    if hora >= 24:
+        hora = hora - 24
+        dia += 1
+
+    if fome < 0:
+        fome = 0
+
+    if sede < 0:
+        sede = 0
+
+    if energia < 0:
+        energia = 0
+
+    if fome == 0:
+        perder_vida(5)
+
+    if sede == 0:
+        perder_vida(8)
+
+
+def perder_vida(dano):
+    global vida
+
+    vida -= dano
+
+    if vida < 0:
+        vida = 0
+
+
+def comer():
+    global comida
+    global fome
+
+    if comida > 0:
+        comida -= 1
+        fome += 30
+
+        if fome > 100:
+            fome = 100
+
+        print("\nVocê comeu alguma coisa.")
+    else:
+        print("\nVocê não tem comida.")
+
+    esperar()
+
+
+def beber():
+    global agua
+    global sede
+
+    if agua > 0:
+        agua -= 1
+        sede += 35
+
+        if sede > 100:
+            sede = 100
+
+        print("\nVocê bebeu água.")
+    else:
+        print("\nVocê não tem água.")
+
+    esperar()
+
+
+def usar_remedio():
+    global remedio
+    global vida
+
+    if remedio > 0:
+
+        if vida < 100:
+            remedio -= 1
+            vida += 30
+
+            if vida > 100:
+                vida = 100
+
+            print("\nVocê usou um remédio.")
+        else:
+            print("\nVocê não precisa usar remédio agora.")
+
+    else:
+        print("\nVocê não tem remédio.")
+
+    esperar()
+
+
+def lutar():
+    global municao
+    global energia
+
+    zumbi = random.randint(1, 3)
+
+    print("\nVocê encontrou", zumbi, "zumbi(s)!")
+
+    while zumbi > 0 and vida > 0:
+
+        print("\n1 - Atirar")
+        print("2 - Tentar fugir")
+        print("3 - Jogar um objeto")
+
+        escolha = input("\nEscolha: ")
+
+        if escolha == "1":
+
+            if municao <= 0:
+                print("\nVocê está sem munição.")
+                continue
+
+            municao -= 1
+
+            acertou = random.randint(1, 100)
+
+            if acertou <= 70:
+                zumbi -= 1
+                print("\nVocê acertou o zumbi!")
+
+                if zumbi == 0:
+                    print("Você conseguiu derrotar os zumbis!")
+
+            else:
+                print("\nVocê errou o tiro.")
+
+            if zumbi > 0:
+                dano = random.randint(5, 15)
+                perder_vida(dano)
+                print("O zumbi te atacou e causou", dano, "de dano.")
+
+        elif escolha == "2":
+
+            energia -= 15
+
+            if random.randint(1, 100) <= 60:
+                print("\nVocê conseguiu fugir!")
+                return
+            else:
+                print("\nVocê não conseguiu fugir.")
+
+                dano = random.randint(5, 15)
+                perder_vida(dano)
+
+        elif escolha == "3":
+
+            if madeira > 0:
+                madeira -= 1
+
+                print("\nVocê jogou um pedaço de madeira.")
+
+                if random.randint(1, 100) <= 80:
+                    print("Os zumbis foram atrás do barulho.")
+                    print("Você conseguiu fugir.")
+                    return
+                else:
+                    print("Os zumbis não caíram na distração.")
+
+                    perder_vida(8)
+
+            else:
+                print("\nVocê não tem nenhum objeto para jogar.")
+
+        else:
+            print("\nEscolha inválida.")
+
+    esperar()
+
+
+def explorar_bairro():
+    global comida
+    global agua
+    global madeira
+    global municao
+    global remedio
+    global pecas
+
+    passar_tempo(1)
+
+    acontecimento = random.randint(1, 100)
+
+    print("\nVocê está andando pelo bairro.")
+
+    if acontecimento <= 35:
+        lutar()
+
+    elif acontecimento <= 50:
+        comida += 1
+        print("\nVocê encontrou comida em uma casa.")
+
+    elif acontecimento <= 65:
+        agua += 1
+        print("\nVocê encontrou uma garrafa de água.")
+
+    elif acontecimento <= 80:
+        madeira += 2
+        print("\nVocê encontrou madeira.")
+
+    elif acontecimento <= 90:
+        municao += 2
+        print("\nVocê encontrou munição.")
+
+    else:
+        print("\nVocê encontrou uma casa estranha.")
+        print("Dentro dela existe um rádio.")
+
+        if historia == 0:
+            primeira_pista()
+
+    esperar()
+
+
+def primeira_pista():
+    global historia
+
+    historia = 1
+
+    print("\nO rádio começou a funcionar sozinho.")
+
+    time.sleep(1)
+
+    print('\n"Se alguém estiver ouvindo..."')
+
+    time.sleep(1)
+
+    print('"Não tente sair da cidade."')
+
+    time.sleep(1)
+
+    print('"O hospital sabe o que aconteceu."')
+
+    print("\nVocê descobriu uma pista.")
+
+    esperar()
+
+
+def ir_hospital():
+    global historia
+    global remedio
+
+    passar_tempo(2)
+
+    print("\nVocê entrou no hospital.")
+
+    if random.randint(1, 100) <= 60:
+        lutar()
+
+    if vida <= 0:
+        return
+
+    remedio += 1
+
+    print("\nVocê encontrou um remédio.")
+
+    if historia == 1:
+
+        historia = 2
+
+        print("\nVocê encontrou alguns documentos.")
+
+        print("\nPaciente: 014")
+        print("Estado: infectado")
+        print("Observação: o paciente não apresentou")
+        print("sintomas nas primeiras horas.")
+
+        print("\nTalvez a delegacia tenha mais informações.")
+
+    esperar()
+
+
+def ir_delegacia():
+    global historia
+    global municao
+    global pecas
+
+    passar_tempo(2)
+
+    print("\nVocê entrou na delegacia.")
+
+    if random.randint(1, 100) <= 60:
+        lutar()
+
+    if vida <= 0:
+        return
+
+    municao += 3
+    pecas += 2
+
+    print("\nVocê encontrou munição e algumas peças.")
+
+    if historia == 2:
+
+        historia = 3
+
+        print("\nVocê encontrou uma gravação.")
+
+        print('\n"Alguém sabia que o vírus iria se espalhar."')
+
+        print('"A cidade foi isolada antes do primeiro ataque."')
+
+        print("\nA gravação fala sobre uma torre de rádio.")
+
+    esperar()
+
+
+def ir_fabrica():
+
+    global madeira
+    global pecas
+
+    passar_tempo(2)
+
+    print("\nVocê entrou na fábrica.")
+
+    if random.randint(1, 100) <= 60:
+        lutar()
+
+    if vida <= 0:
+        return
+
+    madeira += 2
+    pecas += 2
+
+    print("\nVocê encontrou materiais.")
+
+    esperar()
+
+
+def torre_radio():
+
+    global pecas
+
+    passar_tempo(2)
+
+    print("\nVocê chegou na torre de rádio.")
+
+    if historia < 3:
+        print("\nVocê ainda não sabe como ligar o equipamento.")
+        esperar()
+        return False
+
+    if pecas < 2:
+        print("\nVocê precisa de 2 peças para consertar a torre.")
+        esperar()
+        return False
+
+    pecas -= 2
+
+    print("\nVocê começou a consertar a torre...")
+
+    time.sleep(2)
+
+    print("\n📡 SINAL ENVIADO!")
+
+    time.sleep(2)
+
+    print('\nUma voz respondeu pelo rádio.')
+
+    print('"Aqui é o grupo de resgate."')
+    print('"Se você estiver vivo, fique onde está."')
+
+    time.sleep(2)
+
+    print('\nOutra voz apareceu no rádio.')
+
+    print('"NÃO CONFIE NELES."')
+
+    print("\nVocê não sabe em quem acreditar.")
+
+    print("\n==============================")
+    print("           FINAL")
+    print("==============================")
+    print("Você conseguiu pedir ajuda.")
+    print("Mas a cidade ainda esconde muitos segredos.")
+    print("==============================")
+
+    esperar()
+
+    return True
+
+
+def melhorar_abrigo():
+    global madeira
+    global pecas
+    global seguranca_abrigo
+
+    if madeira >= 5 and pecas >= 2:
+
+        madeira -= 5
+        pecas -= 2
+
+        seguranca_abrigo += 15
+
+        if seguranca_abrigo > 100:
+            seguranca_abrigo = 100
+
+        print("\nVocê melhorou o abrigo.")
+        print("Segurança:", seguranca_abrigo, "%")
+
+    else:
+
+        print("\nVocê precisa de:")
+        print("5 madeiras")
+        print("2 peças")
+
+    esperar()
+
+
+def dormir():
+    global dia
+    global hora
+    global energia
+    global fome
+    global sede
+
+    print("\nVocê decidiu dormir.")
+
+    time.sleep(1)
+
+    dia += 1
+    hora = 7
+
+    energia = 100
+    fome -= 15
+    sede -= 20
+
+    if fome < 0:
+        fome = 0
+
+    if sede < 0:
+        sede = 0
+
+    print("\nVocê acordou.")
+
+    print("Agora é dia", dia)
+
+    if random.randint(1, 100) > seguranca_abrigo:
+        print("\nDurante a noite alguns zumbis chegaram perto.")
+        perder_vida(5)
+
+    esperar()
+
+
+def inventario():
+
+    while True:
+
+        limpar_tela()
+
+        print("==============================")
+        print("          INVENTÁRIO")
+        print("==============================")
+
+        print("1 - Comer")
+        print("2 - Beber")
+        print("3 - Usar remédio")
+        print("4 - Voltar")
+
+        escolha = input("\nEscolha: ")
+
+        if escolha == "1":
+            comer()
+
+        elif escolha == "2":
+            beber()
+
+        elif escolha == "3":
+            usar_remedio()
+
+        elif escolha == "4":
+            break
+
+        else:
+            print("\nOpção inválida.")
+            esperar()
+
+
+def menu_abrigo():
+
+    while True:
+
+        limpar_tela()
+
+        print("==============================")
+        print("           ABRIGO")
+        print("==============================")
+
+        print("Segurança:", seguranca_abrigo, "%")
+
+        print("\n1 - Melhorar abrigo")
+        print("2 - Dormir")
+        print("3 - Voltar")
+
+        escolha = input("\nEscolha: ")
+
+        if escolha == "1":
+            melhorar_abrigo()
+
+        elif escolha == "2":
+            dormir()
+            break
+
+        elif escolha == "3":
+            break
+
+
+def menu_explorar():
+
+    global local
+
+    limpar_tela()
+
+    print("==============================")
+    print("        CIDADE MORTA")
+    print("==============================")
+
+    print("\n1 - Bairro")
+    print("2 - Mercado")
+    print("3 - Hospital")
+    print("4 - Delegacia")
+    print("5 - Fábrica")
+    print("6 - Torre de rádio")
+    print("7 - Voltar")
+
+    escolha = input("\nPara onde você quer ir? ")
+
+    if escolha == "1":
+
+        local = "Bairro"
+        explorar_bairro()
+
+    elif escolha == "2":
+
+        local = "Mercado"
+        passar_tempo(1)
+
+        print("\nVocê entrou no mercado.")
+
+        if random.randint(1, 100) <= 70:
+            lutar()
+
+        if vida > 0:
+            print("\nVocê encontrou comida.")
+            comida += 2
+
+        esperar()
+
+    elif escolha == "3":
+
+        local = "Hospital"
+        ir_hospital()
+
+    elif escolha == "4":
+
+        local = "Delegacia"
+        ir_delegacia()
+
+    elif escolha == "5":
+
+        local = "Fábrica"
+        ir_fabrica()
+
+    elif escolha == "6":
+
+        local = "Torre"
+
+        if torre_radio():
+            return True
+
+    elif escolha == "7":
+
+        local = "Abrigo"
+
+    return False
+
+
+while True:
+
+    if vida <= 0:
+
+        limpar_tela()
+
+        print("==============================")
+        print("          VOCÊ MORREU")
+        print("==============================")
+
+        print("\nA cidade acabou vencendo.")
+
+        break
+
+    limpar_tela()
+
+    mostrar_status()
+
+    print("\n==============================")
+
+    if historia == 0:
+        print("🎯 Objetivo: encontre um lugar seguro.")
+
+    elif historia == 1:
+        print("🎯 Objetivo: investigue o hospital.")
+
+    elif historia == 2:
+        print("🎯 Objetivo: investigue a delegacia.")
+
+    else:
+        print("🎯 Objetivo: encontre a torre de rádio.")
+
+    print("==============================")
+
+    print("\n1 - Explorar cidade")
+    print("2 - Inventário")
+    print("3 - Abrigo")
+    print("4 - Sair")
+
+    escolha = input("\nEscolha: ")
+
+    if escolha == "1":
+
+        terminou = menu_explorar()
+
+        if terminou:
+            break
+
+    elif escolha == "2":
+
+        inventario()
+
+    elif escolha == "3":
+
+        menu_abrigo()
+
+    elif escolha == "4":
+
+        print("\nVocê decidiu sair do jogo.")
+        break
+
+    else:
+
+        print("\nEssa opção não existe.")
+        esperar()
+```
