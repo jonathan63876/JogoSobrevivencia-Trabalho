@@ -1,0 +1,189 @@
+Como surgiu a ideia
+A ideia inicial era fazer um jogo de sobrevivência simples.
+O jogo teria algumas escolhas para o jogador.
+Percebi que a ideia estava muito básica e precisava de um contexto.
+Foi escolhida a ideia de uma cidade infectada por zumbis.
+Foram adicionados recursos, exploração, combate e uma história.
+O jogador passou a ter um objetivo além de apenas sobreviver.
+O que foi utilizado no desenvolvimento
+Python
+Pydroid 3 para realizar os testes.
+Terminal para executar o jogo.
+Biblioteca random.
+Biblioteca time.
+Biblioteca os.
+O que foi utilizado da linguagem Python
+Variáveis
+Guardar a vida do jogador.
+Controlar fome, sede e energia.
+Armazenar a quantidade de comida, água, remédios e munição.
+Controlar madeira e peças.
+Registrar o dia e horário do jogo.
+Controlar o progresso da história.
+input()
+Receber as escolhas do jogador.
+Criar os menus.
+Permitir escolher para onde ir.
+Permitir escolher ações durante os combates.
+print()
+Mostrar informações na tela.
+Mostrar os menus.
+Mostrar mensagens da história.
+Mostrar os itens do jogador.
+Mostrar os objetivos.
+Mostrar os resultados das escolhas.
+if, elif e else
+Verificar se o jogador possui algum item.
+Verificar se o jogador pode realizar determinada ação.
+Verificar se conseguiu fugir.
+Verificar se um ataque acertou.
+Verificar se o personagem morreu.
+Controlar o avanço da história.
+Fazer o programa responder de acordo com as escolhas.
+while
+Manter os menus funcionando.
+Permitir que o jogador continue realizando ações.
+Repetir determinadas partes do jogo até uma condição ser atingida.
+Funções
+Separar as diferentes partes do jogo.
+Criar ações como comer, beber, lutar e dormir.
+Organizar o inventário.
+Organizar a exploração.
+Organizar o sistema de abrigo.
+Evitar que todo o código ficasse em uma única parte.
+random
+Escolher aleatoriamente a quantidade de zumbis.
+Criar chances de acertar ou errar ataques.
+Criar chances de conseguir fugir.
+Definir acontecimentos durante a exploração.
+Fazer o jogador encontrar diferentes recursos.
+time
+Criar pequenas pausas durante algumas partes da história.
+Fazer as mensagens aparecerem de forma mais gradual.
+os
+Limpar a tela do terminal.
+Organizar melhor os menus durante a execução do jogo.
+Como as partes foram juntadas
+Primeiro foram criadas as informações do jogador.
+Depois foram adicionados os itens.
+Em seguida foram criados os menus.
+Depois foi criado o sistema de exploração.
+Foi adicionado o sistema de combate.
+Depois foram adicionados os locais da cidade.
+Foi criado o sistema de abrigo.
+Por último, foi adicionada a história e seus objetivos.
+Depois todas as partes foram testadas juntas.
+Pesquisas realizadas
+
+Durante o desenvolvimento foram realizadas pesquisas para entender melhor os comandos e descobrir formas de fazer cada parte do jogo funcionar.
+
+Foram pesquisados assuntos como:
+
+Variáveis em Python.
+Estruturas if e else.
+Estrutura while.
+Criação de funções.
+Uso do input().
+Números aleatórios.
+Bibliotecas do Python.
+Organização de menus.
+Sistemas simples de inventário.
+Sistemas de vida e recursos.
+Como executar Python no Pydroid 3.
+Como corrigir erros que apareceram durante os testes.
+Sites que ajudaram nas pesquisas
+
+Alguns sites que poderiam ser utilizados durante esse tipo de desenvolvimento são:
+
+Python Documentation – documentação oficial do Python, utilizada para consultar o funcionamento dos comandos e bibliotecas.
+
+Python Documentation
+
+W3Schools – utilizado para consultar explicações simples e exemplos de Python.
+
+W3Schools Python
+
+Programiz – possui explicações e exemplos de programação em Python.
+
+Programiz Python
+
+GeeksforGeeks – pode ser utilizado para pesquisar exemplos e explicações de programação.
+
+GeeksforGeeks Python
+
+Stack Overflow – pode ajudar a encontrar soluções para erros específicos encontrados durante a programação.
+
+Stack Overflow
+
+Real Python – possui tutoriais e explicações sobre Python, desde assuntos básicos até assuntos mais avançados.
+
+Real Python
+
+Esses sites serviram como referências para entender conceitos, pesquisar comandos e procurar soluções para problemas que poderiam aparecer durante o desenvolvimento.
+
+Pydroid 3
+Foi utilizado para escrever e executar o código Python.
+Serviu para testar o funcionamento do jogo.
+Foi utilizado para encontrar erros durante o desenvolvimento.
+A versão final não utiliza Pygame.
+Testes realizados
+Iniciar o jogo.
+Explorar a cidade.
+Encontrar itens.
+Ficar sem comida.
+Ficar sem água.
+Usar remédio.
+Encontrar zumbis.
+Atacar zumbis.
+Ficar sem munição.
+Tentar fugir.
+Dormir.
+Melhorar o abrigo.
+Encontrar as pistas.
+Avançar na história.
+Chegar até a torre de rádio.
+Perder toda a vida.
+O que foi aprendido
+Como utilizar variáveis na prática.
+Como utilizar if, elif e else.
+Como utilizar while.
+Como criar funções.
+Como receber informações usando input().
+Como utilizar números aleatórios.
+Como organizar melhor um código.
+Como testar um programa.
+Como encontrar e corrigir erros.
+Como transformar uma ideia em um programa funcionando.
+Dificuldades
+Organizar as ideias do jogo.
+Fazer todas as partes funcionarem juntas.
+Criar uma história que tivesse relação com o jogo.
+Pensar nas diferentes situações que poderiam acontecer.
+Evitar que o jogador pudesse realizar ações sem possuir os recursos necessários.
+Corrigir erros que apareceram durante os testes.
+Organizar o código conforme novas partes eram adicionadas.
+Resultado final
+Foi criado um jogo de sobrevivência chamado “Último Sinal: Cidade Morta”.
+O jogo acontece em uma cidade infectada por zumbis.
+O jogador precisa procurar recursos.
+É possível encontrar comida, água, remédios, munição, madeira e peças.
+Existem diferentes locais para explorar.
+O jogador pode enfrentar ou fugir dos zumbis.
+Existe um sistema de vida, fome, sede e energia.
+Existe um inventário.
+Existe um abrigo que pode ser melhorado.
+A história possui pistas e objetivos.
+O jogador precisa chegar até a torre de rádio para descobrir uma parte importante da história.
+Conclusão
+
+A criação do jogo foi uma forma de colocar em prática o que estou aprendendo no primeiro ano do curso técnico de Informática para Redes.
+
+O projeto começou com uma ideia simples e foi ficando maior conforme novas ideias foram surgindo e algumas pesquisas foram realizadas.
+
+Foram utilizados conteúdos básicos de Python, como variáveis, input(), print(), if, elif, else, while, funções e o módulo random.
+
+As pesquisas ajudaram a entender melhor os comandos e também a resolver algumas dificuldades encontradas durante a criação.
+
+No final, consegui transformar uma ideia que inicialmente era apenas um jogo de escolhas em um jogo de sobrevivência com história, exploração, zumbis, recursos e objetivos.
+
+Mesmo sendo um projeto de nível iniciante, ele ajudou a entender melhor como a programação funciona na prática e como diferentes comandos podem ser usados juntos para criar um programa.
